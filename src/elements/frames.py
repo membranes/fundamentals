@@ -1,3 +1,4 @@
+"""Module frames.py"""
 import typing
 
 import pandas as pd
