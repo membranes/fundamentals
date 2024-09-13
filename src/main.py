@@ -8,6 +8,11 @@ import torch
 
 
 def main():
+    """
+    Entry point
+    
+    :return:
+    """
 
     logger: logging.Logger = logging.getLogger(__name__)
 
@@ -21,13 +26,13 @@ def main():
     # The Data
     data: pd.DataFrame = src.data.source.Source().exc()
     logger.info(data.head())
-    
+
     # Tags
     elements, enumerator, archetype = src.data.tags.Tags(data=data).exc()
     logger.info(elements)
     logger.info(enumerator)
     logger.info(archetype)
-    
+
     # Balance/Imbalance
     data = data.copy().loc[data['category'].isin(values=elements['category'].unique()), :]
 
@@ -58,12 +63,12 @@ if __name__ == '__main__':
     # Activate graphics processing units
     os.environ['CUDA_VISIBLE_DEVICES']='0'
     os.environ['TOKENIZERS_PARALLELISM']='true'
-    
+
     # Modules
     import src.data.source
     import src.data.tags
     import src.data.demarcations
     import src.functions.cache
     import src.models.interface
-    
+
     main()
