@@ -69,7 +69,7 @@ class Steps:
         architecture = src.models.distil.architecture.Architecture(
             variable=self.__variable, enumerator=self.__enumerator, archetype=self.__archetype)
         model = architecture(training=training, validating=validating, tokenizer=self.__tokenizer)
-        self.__logger.info(model.__dir__())
+        self.__logger.info(dir(model))
 
         # Evaluating: vis-à-vis best model
         originals, predictions = src.models.distil.validation.Validation(
