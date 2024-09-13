@@ -94,7 +94,11 @@ The progress of a model training exercise is observable via TensorBoard
 tensorboard --logdir /{output.directory}/{datetime}_{hostname}/ --bind_all
 ```
 
-Subsequently, a link of the form `http://...:6007/` or `http://...:6006/` is printed.  Access the underlying pages via a browser.  It might be necessary to switch to `http://localhost:6007/` or `http://localhost:6006/`
+Subsequently, a link of the form `http://...:6007/` or `http://...:6006/` is printed.  Access the underlying pages via a browser.  It might be necessary to switch to `http://localhost:6007/` or `http://localhost:6006/`.  The output directory, ``, is the directory declared via the `output_dir` parameter of 
+
+```shell
+transformers.TrainingArguments(output_dir=..., ...)
+```
 
 <br>
 
