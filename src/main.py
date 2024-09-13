@@ -20,9 +20,6 @@ def main():
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
     logger.info(msg=device)
 
-    # Ray
-    # ray.init(dashboard_host='172.17.0.2', dashboard_port=8265)
-
     # The Data
     data: pd.DataFrame = src.data.source.Source().exc()
     logger.info(data.head())
