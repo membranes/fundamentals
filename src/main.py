@@ -10,7 +10,7 @@ import torch
 def main():
     """
     Entry point
-    
+
     :return:
     """
 
