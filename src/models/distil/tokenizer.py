@@ -4,6 +4,9 @@ import transformers
 import src.models.distil.parameters as pr
 
 class Tokenizer:
+    """
+    Tokenizer
+    """
 
     def __init__(self):
         """
