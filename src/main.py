@@ -1,9 +1,9 @@
+"""Module main.py"""
 import logging
 import os
 import sys
 
 import pandas as pd
-import ray
 import torch
 
 
@@ -16,7 +16,7 @@ def main():
     logger.info(msg=device)
 
     # Ray
-    ray.init(dashboard_host='172.17.0.2', dashboard_port=8265)
+    # ray.init(dashboard_host='172.17.0.2', dashboard_port=8265)
 
     # The Data
     data: pd.DataFrame = src.data.source.Source().exc()
@@ -36,7 +36,7 @@ def main():
     logger.info(frame.head())
 
     # Temporary
-    frame = frame.loc[:1000, :]
+    frame = frame.loc[:4000, :]
     src.models.interface.Interface(frame=frame, enumerator=enumerator, archetype=archetype).exc()
 
     # Delete Cache Points
