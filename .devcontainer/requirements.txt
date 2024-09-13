@@ -1,0 +1,14 @@
+transformers
+accelerate>=0.31.*
+dask[complete]>2023.*
+seqeval[gpu]
+evaluate
+pandas>=2.*
+numpy>=1.26.*
+scikit-learn>=1.4.*
+requests>=2.31.*
+pytest>=8.1.*
+coverage>=7.4.*
+pylint>=3.1.*
+pytest-cov>=5.0.*
+flake8>=7.0.*
