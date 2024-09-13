@@ -68,17 +68,22 @@ class Metrics:
 
         return labels_, predictions_
 
-    def exc(self, bucket: transformers.trainer_utils.PredictionOutput):
+    def exc(self, bucket: transformers.trainer_utils.PredictionOutput, via_matrices: bool = False):
         """
 
         :param bucket:
+        :param via_matrices
         :return:
         """
 
         predictions = bucket.predictions
         predictions = np.argmax(predictions, axis=2)
         labels = bucket.label_ids
-        labels_, predictions_ = self.__lists(predictions=predictions, labels=labels)
+
+        if via_matrices:
+            labels_, predictions_  = self.__matrices(predictions=predictions, labels=labels)
+        else:
+            labels_, predictions_ = self.__lists(predictions=predictions, labels=labels)
 
         # Hence
         logging.info(predictions_[:5])
