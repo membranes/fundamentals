@@ -1,5 +1,4 @@
 """Module tags.py"""
-import logging
 import typing
 
 import pandas as pd
@@ -26,12 +25,6 @@ class Tags:
         # Categories
         self.__mcf: int = config.Config().minimum_category_frequency
 
-        # Logging
-        logging.basicConfig(level=logging.INFO,
-                            format='\n\n%(message)s\n%(asctime)s.%(msecs)03d',
-                            datefmt='%Y-%m-%d %H:%M:%S')
-        self.__logger: logging.Logger = logging.getLogger(name=__name__)
-
     def __viable(self, blob: pd.DataFrame) -> pd.DataFrame:
         """
         
@@ -46,11 +39,13 @@ class Tags:
         elements.sort_values(by='tag', inplace=True)
 
         return elements
-    
+
     @staticmethod
     def __coding(series: pd.Series) -> typing.Tuple[dict, dict]:
         """
         Tags enumeration, and their inverse mappings.
+
+        archetype = {v: k for v, k in enumerate(iterable=series)}
 
         :param series:
         :return:
@@ -58,7 +53,7 @@ class Tags:
 
         enumerator = {k: v for v, k in enumerate(iterable=series)}
 
-        archetype = {v: k for v, k in enumerate(iterable=series)}
+        archetype = dict(enumerate(iterable=series))
 
         return enumerator, archetype
 
