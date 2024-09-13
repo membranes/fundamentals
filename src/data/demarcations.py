@@ -1,5 +1,4 @@
-import logging
-
+"""Module demarcations.py"""
 import pandas as pd
 
 
@@ -8,7 +7,7 @@ class Demarcations:
     Description
     -----------
 
-    This class builds the expected data structure for ...
+    This class builds the expected data structure per instance/record.
     """
 
     def __init__(self, data: pd.DataFrame) -> None:
@@ -16,38 +15,36 @@ class Demarcations:
 
         :param data:
         """
-        
-        self.__data: pd.DataFrame = data
 
-        # Logging
-        logging.basicConfig(level=logging.INFO,
-                            format='\n\n%(message)s\n%(asctime)s.%(msecs)03d',
-                            datefmt='%Y-%m-%d %H:%M:%S')
-        self.__logger = logging.getLogger(__name__)
+        self.__data: pd.DataFrame = data
 
     @staticmethod
     def __sentences(blob: pd.DataFrame) -> pd.DataFrame:
         """
+        sentences: pd.DataFrame = blob.copy().drop(columns='tag').groupby(
+            by=['sentence_identifier'])['word'].apply(lambda x: ' '.join(x)).to_frame()
 
         :param blob:
         :return:
         """
 
         sentences: pd.DataFrame = blob.copy().drop(columns='tag').groupby(
-            by=['sentence_identifier'])['word'].apply(lambda x: ' '.join(x)).to_frame()
+            by=['sentence_identifier'])['word'].apply(' '.join).to_frame()
 
         return sentences
 
     @staticmethod
     def __labels(blob: pd.DataFrame) -> pd.DataFrame:
         """
+        labels: pd.DataFrame = blob.copy().drop(columns='word').groupby(
+            by=['sentence_identifier'])['tag'].apply(lambda x: ','.join(x)).to_frame()
 
         :param blob:
         :return:
         """
 
         labels: pd.DataFrame = blob.copy().drop(columns='word').groupby(
-            by=['sentence_identifier'])['tag'].apply(lambda x: ','.join(x)).to_frame()
+            by=['sentence_identifier'])['tag'].apply(','.join).to_frame()
 
         return labels
 
