@@ -1,8 +1,9 @@
+"""Module validation.py"""
 import logging
 import typing
 
-import transformers
 import numpy as np
+import transformers
 
 import src.elements.structures as sr
 
