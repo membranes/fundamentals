@@ -1,5 +1,4 @@
-import logging
-
+"""Module architecture.py"""
 import transformers
 
 import config
@@ -8,11 +7,13 @@ import src.elements.variable as vr
 import src.models.distil.intelligence
 import src.models.distil.metrics
 import src.models.distil.parameters as pr
-import src.models.distil.settings
 import src.models.distil.storage
 
 
 class Architecture:
+    """
+    Architecture
+    """
 
     def __init__(self, variable: vr.Variable, enumerator: dict, archetype: dict):
         """
@@ -28,9 +29,6 @@ class Architecture:
 
         # Parameters
         self.__parameters = pr.Parameters()
-
-        # Settings
-        self.__settings = src.models.distil.settings.Settings(variable=self.__variable)
 
         # Directory preparation
         src.models.distil.storage.Storage().exc(path=self.__parameters.path)
