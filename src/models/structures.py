@@ -1,6 +1,4 @@
 """Module structures.py"""
-import logging
-
 import pandas as pd
 import torch.utils.data as tu
 import transformers
@@ -38,12 +36,6 @@ class Structures:
 
         # For DataLoader creation
         self.__loadings = src.models.loadings.Loadings()
-
-        # Logging
-        logging.basicConfig(level=logging.INFO,
-                            format='\n\n%(message)s\n%(asctime)s.%(msecs)03d',
-                            datefmt='%Y-%m-%d %H:%M:%S')
-        self.__logger = logging.getLogger(__name__)
 
     def __structure(self, frame: pd.DataFrame, parameters: dict) -> sr.Structures:
         """
