@@ -2,7 +2,6 @@
 import pandas as pd
 
 import src.models.splittings
-import src.models.bert.steps
 import src.models.distil.steps
 import src.elements.frames
 
@@ -32,8 +31,7 @@ class Interface:
         """
 
         # bert
-        # src.models.bert.steps.Steps(
-        #     enumerator=self.__enumerator, archetype=self.__archetype, frames=self.__frames).exc()
+        # src.models.bert.steps
 
         # electra
         # src.models.electra.steps
