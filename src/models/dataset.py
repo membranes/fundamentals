@@ -1,3 +1,4 @@
+"""Module dataset.py"""
 import numpy as np
 import pandas as pd
 import torch
@@ -8,6 +9,9 @@ import src.elements.variable as vr
 
 
 class Dataset(torch.utils.data.Dataset):
+    """
+    Dataset
+    """
 
     def __init__(self, frame: pd.DataFrame, variable: vr.Variable,
                  enumerator: dict, tokenizer: transformers.tokenization_utils_base) -> None:
@@ -26,7 +30,7 @@ class Dataset(torch.utils.data.Dataset):
         self.__variable = variable
         self.__enumerator = enumerator
         self.__tokenizer = tokenizer
-    
+
     def __getitem__(self, index) -> dict:
         """
 
@@ -47,7 +51,7 @@ class Dataset(torch.utils.data.Dataset):
         # The corresponding tags of a sentence's words, and the code of each tag
         tags: list[str] = self.__frame['tagstr'][index].split(',')
         labels = [self.__enumerator[tag] for tag in tags]
-        
+
         # Herein, per word index cf. offset pairings.  There are <max_length> tokens.
         # (maximum number of tokens, 2)
         limit = len(labels)
@@ -57,9 +61,9 @@ class Dataset(torch.utils.data.Dataset):
 
         encoding['labels'] = ela
         item = {key: torch.as_tensor(value) for key, value in encoding.items()}
-        
+
         return item
-    
+
     def __len__(self):
         """
 
