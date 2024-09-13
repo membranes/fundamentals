@@ -1,3 +1,4 @@
+"""Module variable.py"""
 import typing
 
 class Variable(typing.NamedTuple):
