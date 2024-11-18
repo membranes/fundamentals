@@ -277,7 +277,15 @@ inspects complexity.
 #### Miscellaneous
 
 * [Freedom of information (FOI) Improvement Plan 2024](https://www.gov.scot/publications/freedom-of-information-foi-improvement-plan-2024/)
-
+* [Create a tracking server using the AWS CLI](https://docs.aws.amazon.com/sagemaker/latest/dg/mlflow-create-tracking-server-cli.html)
+  * [Integrate MLflow with your environment](https://docs.aws.amazon.com/sagemaker/latest/dg/mlflow-track-experiments.html)
+  * [Machine learning experiments using Amazon SageMaker with MLflow](https://docs.aws.amazon.com/sagemaker/latest/dg/mlflow.html)
+  * [Start & Stop an MLflow Tracking Server via SageMaker](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/sagemaker/index.html)
+  * [Clean up MLflow Resources](https://docs.aws.amazon.com/sagemaker/latest/dg/mlflow-cleanup.html)
+  * [MLfow & Transformers](https://github.com/mlflow/mlflow/blob/master/examples/transformers/MLFlow_X_HuggingFace_Finetune_a_text_classification_model.ipynb)
+  * [Transformers within MLflow](https://mlflow.org/docs/latest/llms/transformers/guide/index.html)
+  * [MLflow Tracking Quickstart](https://mlflow.org/docs/latest/getting-started/intro-quickstart/index.html)
+* [Announcing the general availability of fully managed MLflow on Amazon SageMaker](https://aws.amazon.com/blogs/aws/manage-ml-and-generative-ai-experiments-using-amazon-sagemaker-with-mlflow/)
 
 <br>
 <br>
