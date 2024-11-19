@@ -50,7 +50,8 @@ class Hyperpoints:
         """
 
         # The transformers.Trainer
-        tunnel = src.models.prerequisites.Prerequisites(arguments=self.__arguments, enumerator=self.__enumerator, archetype=self.__archetype)
+        tunnel = src.models.prerequisites.Prerequisites(
+            arguments=self.__arguments, enumerator=self.__enumerator, archetype=self.__archetype)
         trainer = tunnel(training=training, validating=validating, tokenizer=tokenizer)
 
         # Tuning
