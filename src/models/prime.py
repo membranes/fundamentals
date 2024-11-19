@@ -1,6 +1,4 @@
 """Module prime.py"""
-import os
-
 import datasets
 import transformers
 
@@ -30,11 +28,6 @@ class Prime:
         self.__enumerator = enumerator
         self.__archetype = archetype
         self.__arguments = arguments
-
-        # Training Arguments
-        self.__args = src.models.training_arguments.TrainingArguments(arguments=self.__arguments).exc()
-
-
 
     def exc(self, training: datasets.Dataset, validating: datasets.Dataset,
             tokenizer: transformers.tokenization_utils_base.PreTrainedTokenizerBase):
