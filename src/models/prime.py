@@ -1,5 +1,4 @@
 """Module prime.py"""
-import logging
 import os
 
 import datasets
@@ -35,8 +34,7 @@ class Prime:
         # Training Arguments
         self.__args = src.models.training_arguments.TrainingArguments(arguments=self.__arguments).exc()
 
-        # Intelligence
-        self.__algorithm = src.models.algorithm.Algorithm(architecture=self.__arguments.architecture)
+
 
     def exc(self, training: datasets.Dataset, validating: datasets.Dataset,
             tokenizer: transformers.tokenization_utils_base.PreTrainedTokenizerBase):
@@ -48,31 +46,10 @@ class Prime:
         :return:
         """
 
-        # Model
-        algorithm = self.__algorithm.exc(
-            arguments=self.__arguments, enumerator=self.__enumerator, archetype=self.__archetype)
+        trainer = src.models.prerequisites.Prerequisites(
+            arguments=self.__arguments, enumerator=self.__enumerator, archetype=self.__archetype)(
+            training=training, validating=validating, tokenizer=tokenizer)
 
-        # Metrics
-        metrics = src.models.metrics.Metrics(archetype=self.__archetype)
+        trainer.train()
 
-        # Data Collator
-        data_collator: transformers.DataCollatorForTokenClassification = (
-            transformers.DataCollatorForTokenClassification(tokenizer=tokenizer))
-
-        # Hence
-        trainer = transformers.Trainer(
-            model_init=algorithm.model,
-            args=self.__args,
-            data_collator=data_collator,
-            train_dataset=training,
-            eval_dataset=validating,
-            tokenizer=tokenizer,
-            compute_metrics=metrics.exc
-        )
-
-        model = trainer.train()
-
-        # Save
-        model.save_model(output_dir=os.path.join(self.__arguments.model_output_directory, 'model'))
-
-        return model
+        return trainer
