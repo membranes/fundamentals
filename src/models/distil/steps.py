@@ -77,8 +77,8 @@ class Steps:
             WEIGHT_DECAY=best.hyperparameters.get('weight_decay'),
             TRAIN_BATCH_SIZE=best.hyperparameters.get('per_device_train_batch_size'))
 
-        # Additionally, prepare the artefacts storage area for the best model, vis-à-vis best hyperparameters set, and
-        # save a checkpoint at the optimal training point only by setting save_total_limit = 1.
+        # Additionally, prepare the artefacts storage area for the best model, vis-à-vis best hyperparameters
+        # set, and save a checkpoint at the optimal training point only by setting save_total_limit = 1.
         self.__arguments = self.__arguments._replace(
             model_output_directory=os.path.join(self.__section, 'prime'),
             EPOCHS=2*self.__arguments.EPOCHS, save_total_limit=1)
@@ -87,6 +87,9 @@ class Steps:
         model = src.models.prime.Prime(
             enumerator=self.__enumerator, archetype=self.__archetype, arguments=self.__arguments).exc(
             training=yields['training'], validating=yields['validating'], tokenizer=self.__tokenizer)
+
+        # Save
+        model.save_model(output_dir=os.path.join(self.__arguments.model_output_directory, 'model'))
 
         # Evaluating: vis-à-vis model & validation data
         originals, predictions = src.models.validation.Validation(
