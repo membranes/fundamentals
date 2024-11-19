@@ -2,6 +2,7 @@
 import logging
 import typing
 
+import numpy as np
 import pandas as pd
 
 import config
@@ -9,20 +10,16 @@ import config
 
 class Splittings:
     """
-    Splittings
+    Class Splittings
     """
 
-    def __init__(self, frame: pd.DataFrame) -> None:
+    def __init__(self) -> None:
         """
-
-        :param frame: The data set for the modelling stages
+        Constructor
         """
-
-        self.__frame = frame
 
         # Configurations
         self.__configurations = config.Config()
-
 
         # Logging
         logging.basicConfig(level=logging.INFO,
@@ -49,29 +46,31 @@ class Splittings:
         parent.reset_index(drop=True, inplace=True)
         child.reset_index(drop=True, inplace=True)
 
-        self.__logger.info('parent: %s', parent.shape)
-        self.__logger.info('child: %s', child.shape)
-
         return parent, child
 
-    def exc(self) -> typing.Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+    def exc(self, data: pd.DataFrame) -> typing.Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
         """
 
+        :param data: The data set for the modelling stages
         :return:
-        training: pandas.DataFrame
-            The training stage data
-        validating: pandas.DataFrame
-            The validating stage data
-        testing: pandas.DataFrame
-            The testing stage data
+            training: pandas.DataFrame
+                The training stage data
+            validating: pandas.DataFrame
+                The validating stage data
+            testing: pandas.DataFrame
+                The testing stage data
         """
 
-        training, validating = self.__split(data=self.__frame, frac=self.__configurations.fraction)
+        training, validating = self.__split(data=data, frac=self.__configurations.fraction)
 
         if self.__configurations.aside > 0:
             frac = 1 - self.__configurations.aside
             validating, testing = self.__split(data=validating, frac=frac)
         else:
-            testing = None
+            testing = pd.DataFrame()
+
+        self.__logger.info('training: %s', training.shape)
+        self.__logger.info('validating: %s', validating.shape)
+        self.__logger.info('testing: %s', testing.shape if not testing.empty else np.nan)
 
         return training, validating, testing

@@ -2,21 +2,17 @@
 import logging
 import typing
 
+import datasets
 import numpy as np
 import transformers
 
-import src.elements.structures as sr
-
 
 class Validation:
-    """Validation Class
-
-    <br>
-    Summarises a variety of validation steps
-
+    """
+    Executes the validation steps.
     """
 
-    def __init__(self, validating: sr.Structures, archetype: dict):
+    def __init__(self, validating: datasets.Dataset, archetype: dict):
         """
 
         :param validating:
@@ -33,14 +29,14 @@ class Validation:
     def exc(self, model: transformers.Trainer) -> typing.Tuple[list, list]:
         """
 
-        :param model:
+        :param model: The model; trained using the best set of hyperparameters.
         :return:
             labels: The codes of the original labels<br>
             predictions: The predicted codes
         """
 
         # The outputs bucket
-        bucket = model.predict(self.__validating.dataset)
+        bucket = model.predict(self.__validating)
         __labels: np.ndarray = bucket.label_ids
         __predictions: np.ndarray = bucket.predictions
         self.__logger.info('Labels: %s', __labels.shape)

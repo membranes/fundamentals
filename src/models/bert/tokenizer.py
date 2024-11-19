@@ -1,4 +1,4 @@
-"""Module tokenizer"""
+"""Module tokenizer.py"""
 import transformers
 
 import src.elements.arguments as ag
@@ -6,13 +6,15 @@ import src.elements.arguments as ag
 
 class Tokenizer:
     """
-    Class Tokenizer: <a href="https://arxiv.org/abs/1910.01108" target="_blank">Distil BERT</a>
+    Class Tokenizer: <a href="https://arxiv.org/abs/1810.04805" target="_blank">BERT</a>
      (Bidirectional Encoder Representations from Transformers)
     """
 
     def __init__(self, arguments: ag.Arguments):
         """
 
+        Parameters<br>
+        ------------<br>
         :param arguments: A suite of values/arguments for machine learning model development.<br>
         """
 
@@ -25,6 +27,6 @@ class Tokenizer:
         """
 
         # Tokenizer
-        return transformers.DistilBertTokenizerFast.from_pretrained(
+        return transformers.BertTokenizerFast.from_pretrained(
             pretrained_model_name_or_path=self.__arguments.pretrained_model_name,
             clean_up_tokenization_spaces=True)

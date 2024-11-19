@@ -40,10 +40,6 @@ class Directories:
         elements = [directory for _, directories, _ in os.walk(path) for directory in directories]
         assert len(elements) == 0, f'Unable to delete all directories within path {path}'
 
-        # Finally
-        if os.path.exists(path):
-            os.rmdir(path)
-
         # Hence
         return len(elements) == 0
 

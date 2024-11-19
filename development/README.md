@@ -10,7 +10,7 @@ For this Python project/template, the remote development environment requires
 An image is built via the command
 
 ```shell
-docker build . --file .devcontainer/Dockerfile -t text
+docker build . --file .devcontainer/Dockerfile -t nlc
 ```
 
 On success, the output of
@@ -30,7 +30,7 @@ should include
 
 <br>
 
-Subsequently, run a container, i.e., an instance, of the image `text` via:
+Subsequently, run a container, i.e., an instance, of the image `nlc` via:
 
 <br>
 
@@ -38,7 +38,7 @@ Subsequently, run a container, i.e., an instance, of the image `text` via:
 docker run --rm --gpus all --shm-size=16gb -i -t 
   -p 127.0.0.1:6007:6007 -p 127.0.0.1:6006:6006 
     -p 172.17.0.2:8265:8265 -p 172.17.0.2:6379:6379 -w /app 
-	    --mount type=bind,src="$(pwd)",target=/app text
+	    --mount type=bind,src="$(pwd)",target=/app nlc
 ```
 
 or
@@ -46,7 +46,7 @@ or
 ```shell
 docker run --rm --gpus all --shm-size=16gb -i -t 
   -p 6007:6007 -p 6006:6006 -p 8265:8265 -p 6379:6379  
-    -w /app --mount type=bind,src="$(pwd)",target=/app text
+    -w /app --mount type=bind,src="$(pwd)",target=/app nlc
 ```
 
 <br>
@@ -60,7 +60,7 @@ Herein, `-p 6007:6007` maps the host port `6007` to container port `6007`.  Note
 
 <br>
 
-Get the name of the running instance of ``text`` via:
+Get the name of the running instance of ``nlc`` via:
 
 ```shell
 docker ps --all
@@ -277,7 +277,15 @@ inspects complexity.
 #### Miscellaneous
 
 * [Freedom of information (FOI) Improvement Plan 2024](https://www.gov.scot/publications/freedom-of-information-foi-improvement-plan-2024/)
-
+* [Create a tracking server using the AWS CLI](https://docs.aws.amazon.com/sagemaker/latest/dg/mlflow-create-tracking-server-cli.html)
+  * [Integrate MLflow with your environment](https://docs.aws.amazon.com/sagemaker/latest/dg/mlflow-track-experiments.html)
+  * [Machine learning experiments using Amazon SageMaker with MLflow](https://docs.aws.amazon.com/sagemaker/latest/dg/mlflow.html)
+  * [Start & Stop an MLflow Tracking Server via SageMaker](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/sagemaker/index.html)
+  * [Clean up MLflow Resources](https://docs.aws.amazon.com/sagemaker/latest/dg/mlflow-cleanup.html)
+  * [MLfow & Transformers](https://github.com/mlflow/mlflow/blob/master/examples/transformers/MLFlow_X_HuggingFace_Finetune_a_text_classification_model.ipynb)
+  * [Transformers within MLflow](https://mlflow.org/docs/latest/llms/transformers/guide/index.html)
+  * [MLflow Tracking Quickstart](https://mlflow.org/docs/latest/getting-started/intro-quickstart/index.html)
+* [Announcing the general availability of fully managed MLflow on Amazon SageMaker](https://aws.amazon.com/blogs/aws/manage-ml-and-generative-ai-experiments-using-amazon-sagemaker-with-mlflow/)
 
 <br>
 <br>

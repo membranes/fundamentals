@@ -14,7 +14,7 @@ jobs:
       max-parallel: 4
       fail-fast: false
       matrix:
-        python-version: ['3.10']
+        python-version: ['3.11']
 
     steps:
       - uses: actions/checkout@v4
@@ -50,6 +50,9 @@ jobs:
           printf "\n src/functions "
           flake8 --count --select=E9,F63,F7,F82 --show-source --statistics src/functions
           
+          printf "\n src/models/bert "
+          flake8 --count --select=E9,F63,F7,F82 --show-source --statistics src/models/bert
+          
           printf "\n src/models/distil "
           flake8 --count --select=E9,F63,F7,F82 --show-source --statistics src/models/distil
           
@@ -69,6 +72,9 @@ jobs:
           
           printf "\n src/functions "
           flake8 --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics src/functions
+          
+          printf "\n src/models/bert "
+          flake8 --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics src/models/bert
           
           printf "\n src/models/distil "
           flake8 --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics src/models/distil
@@ -90,6 +96,9 @@ jobs:
           
           printf "\n Package src/functions"
           pylint --rcfile .pylintrc src/functions
+          
+          printf "\n Package src/models/bert"
+          pylint --rcfile .pylintrc src/models/bert
           
           printf "\n Package src/models/distil"
           pylint --rcfile .pylintrc src/models/distil

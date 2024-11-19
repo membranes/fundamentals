@@ -6,11 +6,19 @@ import src.elements.arguments as ag
 
 class Intelligence:
     """
-    Intelligence
+
+    Cf.
+    https://github.com/huggingface/notebooks/blob/main/examples/token_classification.ipynb
+    https://huggingface.co/docs/transformers/training#training-loop
+    https://colab.research.google.com/github/NielsRogge/Transformers-Tutorials/blob/master/BERT/\
+        Custom_Named_Entity_Recognition_with_BERT_only_first_wordpiece.ipynb#scrollTo=GLFivpkwW1HY
     """
 
     def __init__(self, enumerator: dict, archetype: dict, arguments: ag.Arguments):
         """
+
+        Parameters<br>
+        ------------<br>
 
         :param enumerator: {label: id, ...}<br>
         :param archetype: {id: label, ...}<br>
@@ -35,13 +43,12 @@ class Intelligence:
         :return:
         """
 
-        config = transformers.DistilBertConfig(dropout=0.1, activation='gelu').from_pretrained(
+        config = transformers.BertConfig(hidden_dropout_prob=0.1,  hidden_act='gelu').from_pretrained(
             pretrained_model_name_or_path=self.__arguments.pretrained_model_name,
             **{'num_labels': len(self.__enumerator),
                'label2id': self.__enumerator,
                'id2label': self.__archetype})
 
-        return transformers.DistilBertForTokenClassification.from_pretrained(
-            pretrained_model_name_or_path=self.__arguments.pretrained_model_name,
-            config=config
+        return transformers.BertForTokenClassification.from_pretrained(
+            pretrained_model_name_or_path=self.__arguments.pretrained_model_name, config=config
         )

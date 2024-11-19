@@ -5,21 +5,23 @@ import torch
 import torch.utils.data
 import transformers
 
-import src.elements.variable as vr
+import src.elements.arguments as ag
 
 
 class Dataset(torch.utils.data.Dataset):
     """
-    Dataset
+    Dataset builder, vis-à-vis the tokenization method of the architecture in question.
     """
 
-    def __init__(self, frame: pd.DataFrame, variable: vr.Variable,
+    def __init__(self, frame: pd.DataFrame, arguments: ag.Arguments,
                  enumerator: dict, tokenizer: transformers.tokenization_utils_base) -> None:
         """
-
-        :param frame:
-        :param variable:
-        :param enumerator:
+        Parameters<br>
+        -----------<br>
+        :param frame: The data object within which the data being tokenized resides.<br>
+        :param arguments: A suite of values/arguments for machine learning model development.<br>
+        :param enumerator: Of tags; key &rarr; identifier, value &rarr; label<br>
+        :param tokenizer: The tokenizer of text.<br>
         """
 
         super().__init__()
@@ -27,7 +29,7 @@ class Dataset(torch.utils.data.Dataset):
         self.__frame = frame
         self.__length = len(self.__frame)
 
-        self.__variable = variable
+        self.__arguments = arguments
         self.__enumerator = enumerator
         self.__tokenizer = tokenizer
 
@@ -39,14 +41,14 @@ class Dataset(torch.utils.data.Dataset):
         """
 
         # A sentence's words, and the tokenization of words
-        words: list[str] = self.__frame['sentence'][index].strip().split()
+        words: list[str] = self.__frame['sentence'][index].split()
         encoding: dict = self.__tokenizer(words, padding='max_length', truncation=True,
                                           is_split_into_words=True,
-                                          max_length=self.__variable.MAX_LENGTH,
+                                          max_length=self.__arguments.MAX_LENGTH,
                                           return_offsets_mapping=True)
 
         # placeholder array of labels for the encoding dict
-        ela: np.ndarray = np.ones(shape=self.__variable.MAX_LENGTH, dtype=int) * -100
+        ela: np.ndarray = np.ones(shape=self.__arguments.MAX_LENGTH, dtype=int) * -100
 
         # The corresponding tags of a sentence's words, and the code of each tag
         tags: list[str] = self.__frame['tagstr'][index].split(',')

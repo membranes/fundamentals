@@ -1,11 +1,11 @@
 """
-Module loadings.py
+Module loader.py
 """
 
 import torch.utils.data as tu
 
 
-class Loadings:
+class Loader:
     """
     Description
     ===========

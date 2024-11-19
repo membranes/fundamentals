@@ -1,5 +1,6 @@
 # Pytorch
-FROM pytorch/pytorch:2.2.2-cuda12.1-cudnn8-runtime
+# FROM pytorch/pytorch:2.2.2-cuda12.1-cudnn8-runtime
+FROM pytorch/pytorch:2.4.1-cuda12.1-cudnn9-runtime
 
 
 # If the steps of a `Dockerfile` use files that are different from the `context` file, COPY the
