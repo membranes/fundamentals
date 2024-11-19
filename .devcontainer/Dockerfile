@@ -21,7 +21,7 @@ RUN apt update && apt -q -y upgrade && apt -y install sudo && sudo apt -y instal
 # Port
 # TensorBoard: 6006, 6007
 # Ray: 8265, 6379
-EXPOSE 6006 6007 8265 6379
+EXPOSE 6006 6007 8265 6379 5000
 
 
 # ENTRYPOINT
