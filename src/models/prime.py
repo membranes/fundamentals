@@ -1,4 +1,5 @@
 """Module prime.py"""
+import logging
 import os
 
 import datasets
@@ -8,7 +9,7 @@ import src.elements.arguments as ag
 import src.models.algorithm
 import src.models.metrics
 import src.models.training_arguments
-import src.models.tunnel
+import src.models.prerequisites
 
 
 class Prime:
@@ -31,6 +32,12 @@ class Prime:
         self.__archetype = archetype
         self.__arguments = arguments
 
+        # Training Arguments
+        self.__args = src.models.training_arguments.TrainingArguments(arguments=self.__arguments).exc()
+
+        # Intelligence
+        self.__algorithm = src.models.algorithm.Algorithm(architecture=self.__arguments.architecture)
+
     def exc(self, training: datasets.Dataset, validating: datasets.Dataset,
             tokenizer: transformers.tokenization_utils_base.PreTrainedTokenizerBase):
         """
@@ -41,12 +48,31 @@ class Prime:
         :return:
         """
 
-        # The transformers.Trainer
-        tunnel = src.models.tunnel.Tunnel(arguments=self.__arguments, enumerator=self.__enumerator, archetype=self.__archetype)
-        trainer = tunnel(training=training, validating=validating, tokenizer=tokenizer)
+        # Model
+        algorithm = self.__algorithm.exc(
+            arguments=self.__arguments, enumerator=self.__enumerator, archetype=self.__archetype)
+
+        # Metrics
+        metrics = src.models.metrics.Metrics(archetype=self.__archetype)
+
+        # Data Collator
+        data_collator: transformers.DataCollatorForTokenClassification = (
+            transformers.DataCollatorForTokenClassification(tokenizer=tokenizer))
+
+        # Hence
+        trainer = transformers.Trainer(
+            model_init=algorithm.model,
+            args=self.__args,
+            data_collator=data_collator,
+            train_dataset=training,
+            eval_dataset=validating,
+            tokenizer=tokenizer,
+            compute_metrics=metrics.exc
+        )
 
         model = trainer.train()
 
+        # Save
         model.save_model(output_dir=os.path.join(self.__arguments.model_output_directory, 'model'))
 
         return model
