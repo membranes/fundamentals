@@ -1,4 +1,4 @@
-"""Module tunnel.py"""
+"""Module prerequisites.py"""
 import datasets
 import transformers
 
@@ -8,9 +8,9 @@ import src.models.metrics
 import src.models.training_arguments
 
 
-class Tunnel:
+class Prerequisites:
     """
-    Tunnel
+    Prerequisites
     """
 
     def __init__(self, arguments: ag.Arguments, enumerator: dict, archetype: dict):
