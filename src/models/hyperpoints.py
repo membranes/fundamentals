@@ -49,7 +49,7 @@ class Hyperpoints:
         :return:
         """
 
-        # The transformers.Trainer        
+        # The transformers.Trainer
         trainer = src.models.prerequisites.Prerequisites(
             arguments=self.__arguments, enumerator=self.__enumerator, archetype=self.__archetype)(
             training=training, validating=validating, tokenizer=tokenizer)
