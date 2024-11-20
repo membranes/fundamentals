@@ -27,6 +27,10 @@ class Arguments(typing.NamedTuple):
         <a href="https://huggingface.co/docs/setfit/reference/trainer#setfit.TrainingArguments.save_total_limit"
         target="_blank">
         The maximum # of checkpoints that will be retained.</a><br>
+    early_stopping_patience: <b>int</b>
+        <a
+        href="https://huggingface.co/docs/transformers/v4.46.3/en/main_classes/callback#transformers.EarlyStoppingCallback">
+        For EarlyStoppingCallback</a>: <i>in re</i> transformers.Trainer.<br>
     perturbation_interval: <b>float</b>
         <a href="https://docs.ray.io/en/latest/tune/api/doc/ray.tune.schedulers.PopulationBasedTraining.html" target="_blank">
         Population Based Training</a><br>
@@ -38,7 +42,7 @@ class Arguments(typing.NamedTuple):
         Population Based Training</a><br>
     task : <b>str</b> The type of task the model is being trained for<br>
     pretrained_model_name : <b>str</b> The name of the pre-trained model that will be fine-tuned<br>
-    architecture : <b>str</b> A name that identifies the underlying pre-trained model
+    architecture : <b>str</b> A name that identifies the underlying pre-trained model.<br>
     model_output_directory: <b>str</b>
     """
 
@@ -58,6 +62,7 @@ class Arguments(typing.NamedTuple):
     N_TRIALS: int
     N_INSTANCES: int
     save_total_limit: int
+    early_stopping_patience: int
     perturbation_interval: int
     quantile_fraction: float
     resample_probability: float
