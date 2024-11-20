@@ -49,10 +49,10 @@ class Hyperpoints:
         :return:
         """
 
-        # The transformers.Trainer
-        tunnel = src.models.prerequisites.Prerequisites(
-            arguments=self.__arguments, enumerator=self.__enumerator, archetype=self.__archetype)
-        trainer = tunnel(training=training, validating=validating, tokenizer=tokenizer)
+        # The transformers.Trainer        
+        trainer = src.models.prerequisites.Prerequisites(
+            arguments=self.__arguments, enumerator=self.__enumerator, archetype=self.__archetype)(
+            training=training, validating=validating, tokenizer=tokenizer)
 
         # Tuning
         tuning = src.models.tuning.Tuning(arguments=self.__arguments, hyperspace=self.__hyperspace)
