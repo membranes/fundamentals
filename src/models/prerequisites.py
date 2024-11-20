@@ -60,7 +60,9 @@ class Prerequisites:
             train_dataset=training,
             eval_dataset=validating,
             tokenizer=tokenizer,
-            compute_metrics=metrics.exc
+            compute_metrics=metrics.exc,
+            callbacks=[transformers.EarlyStoppingCallback(
+                early_stopping_patience=self.__arguments.early_stopping_patience)]
         )
 
         return trainer
