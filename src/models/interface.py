@@ -10,6 +10,7 @@ import src.elements.hyperspace as hp
 import src.elements.vault
 import src.functions.directories
 import src.functions.streams
+import src.models.bert.steps
 import src.models.distil.steps
 import src.models.splittings
 
@@ -69,7 +70,9 @@ class Interface:
         # Hence
         match architecture:
             case 'bert':
-                logging.info('BERT: Future')
+                src.models.bert.steps.Steps(
+                    enumerator=self.__enumerator, archetype=self.__archetype,
+                    arguments=arguments, hyperspace=hyperspace, vault=self.__vault)
             case 'electra':
                 logging.info('ELECTRA: Future')
             case 'roberta':
