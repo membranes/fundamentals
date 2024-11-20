@@ -128,7 +128,7 @@ jobs:
   packages:
     name: GitHub Packages Container Registry
     needs: build
-    if: ${{ false }} # github.ref == 'refs/heads/master'
+    if: ${{ false }}
     runs-on: ubuntu-latest
 
     permissions:
@@ -168,7 +168,7 @@ jobs:
   ecr:
     name: Amazon Elastic Container Registry
     needs: build
-    if: ${{ false }} # github.ref == 'refs/heads/master'
+    if: ${{ false }}
     runs-on: ubuntu-latest
 
     permissions:
