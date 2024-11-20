@@ -54,6 +54,8 @@ class TrainingArguments:
             seed=config.Config().seed,
             save_total_limit=self.__arguments.save_total_limit,
             skip_memory_metrics=True,
+            metric_for_best_model='eval_loss',
+            greater_is_better=False,
             load_best_model_at_end=True,
             logging_dir=os.path.join(self.__arguments.model_output_directory, 'logs'),
             fp16=True,
